@@ -6,7 +6,12 @@ import LogIn from '../screens/session2/LogIn.tsx';
 import ForgotPassword from '../screens/session2/ForgotPassword.tsx';
 import OTPVerification from '../screens/session2/OTPVerification.tsx';
 import NewPassword from '../screens/session2/NewPassword.tsx';
-import Home from '../screens/session2/Home.tsx';
+import Layout from '../screens/session3/Layout.tsx';
+import AddPaymentMethod from '../screens/session3/profile/add-payment-method/AddPaymentMethod.tsx';
+import Notifications from '../screens/session3/profile/notifications/Notifications.tsx';
+import Statements from '../screens/session3/profile/statements/Statements.tsx';
+import StatementsResult from '../screens/session3/profile/statements/StatementsResult.tsx';
+import TransactionScreen from '../screens/session3/profile/transaction-screen/TransactionScreen.tsx';
 import React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -58,8 +63,33 @@ const Navigation = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name={'Home'}
-          component={Home}
+          name={'Layout'}
+          component={Layout}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={'AddPaymentMethod'}
+          component={AddPaymentMethod}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={'Notifications'}
+          component={Notifications}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={'Statements'}
+          component={Statements}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={'StatementsResult'}
+          component={StatementsResult}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={'TransactionScreen'}
+          component={TransactionScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

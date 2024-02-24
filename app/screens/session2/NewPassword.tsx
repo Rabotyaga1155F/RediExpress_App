@@ -35,7 +35,7 @@ const NewPassword = ({navigation}: any) => {
       if (error) {
         Alert.alert('Ошибка', error.message);
       } else {
-        navigation.navigate('Home');
+        navigation.navigate('Layout');
       }
     } catch (error) {
       Alert.alert('Ошибка');

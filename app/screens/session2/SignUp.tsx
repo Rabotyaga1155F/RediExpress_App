@@ -20,6 +20,7 @@ const SignUp = ({navigation}: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
   const login = async () => {
     if (email && password) {
@@ -51,7 +52,8 @@ const SignUp = ({navigation}: any) => {
       phoneNumber !== '' &&
       email !== '' &&
       password !== '' &&
-      confirmPassword !== ''
+      confirmPassword !== '' &&
+      toggleCheckBox
     );
   };
 
@@ -90,7 +92,7 @@ const SignUp = ({navigation}: any) => {
         haveNoVisible={true}
         onChangeText={setConfirmPassword}
       />
-      <CheckBoxComponentSignUp />
+      <CheckBoxComponentSignUp setter={setToggleCheckBox} />
       <BigBlueButton
         disable={!isFormValid()}
         onPress={async () => {

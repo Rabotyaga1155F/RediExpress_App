@@ -34,7 +34,7 @@ const Onboarding3 = ({navigation}: any) => {
         <Text className={'text-[#A7A7A7] text-[14px]'}>
           Already have an account?
         </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('LogIn')}>
           <Text className={'text-[#0560FA] ml-[1px] text-[14px] font-medium'}>
             Sign in
           </Text>

@@ -6,6 +6,8 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import {supabase} from '../../../supabase.ts';
+import {useDispatch} from 'react-redux';
+import {createAction} from '@reduxjs/toolkit';
 
 interface IProps {
   navigation: any;
@@ -13,10 +15,12 @@ interface IProps {
 
 const GoogleSignIn: FC<IProps> = ({navigation}) => {
   GoogleSignin.configure({
-    scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
+    scopes: ['https://www.googleapis.com/auth/drive.readonly'],
     webClientId:
-      '153487173742-2nu7malh2ipk87nuvpqd3mqpa8c7j9os.apps.googleusercontent.com', // client ID of type WEB for your server. Required to get the idToken on the user object, and for offline access.
+      '153487173742-2nu7malh2ipk87nuvpqd3mqpa8c7j9os.apps.googleusercontent.com',
   });
+  const setUserInfo = createAction<any>('user/setUserInfo');
+  const dispatch = useDispatch();
 
   return (
     <View>
@@ -25,14 +29,13 @@ const GoogleSignIn: FC<IProps> = ({navigation}) => {
           try {
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
-            console.log(JSON.stringify(userInfo, null, 2));
             if (userInfo.idToken) {
               const {data, error} = await supabase.auth.signInWithIdToken({
                 provider: 'google',
                 token: userInfo.idToken,
               });
-              console.log(error, data);
-              navigation.navigate('Home');
+              dispatch(setUserInfo(userInfo));
+              navigation.navigate('Layout');
             } else {
               throw new Error('no id token present');
             }

@@ -61,7 +61,7 @@ const LogIn = ({navigation}: any) => {
             });
             if (error) {
             } else {
-              navigation.navigate('Home');
+              navigation.navigate('Layout');
             }
           } else {
             Alert.alert('Неверно');
@@ -73,7 +73,7 @@ const LogIn = ({navigation}: any) => {
         <Text className={'text-[#A7A7A7] text-[14px] text-center'}>
           Already have an account?
         </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
           <Text className={'text-[#0560FA] font-medium text-[14px]'}>
             Sign up
           </Text>
