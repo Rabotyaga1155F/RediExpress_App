@@ -5,11 +5,15 @@ import CheckBox from '@react-native-community/checkbox';
 import BigBlueButton from '../../ui/buttons/BigBlueButton/BigBlueButton.tsx';
 import {supabase} from '../../supabase.ts';
 import GoogleSignIn from './auth/GoogleSignIn.tsx';
+import {useDispatch} from 'react-redux';
+import {createAction} from '@reduxjs/toolkit';
 
 const LogIn = ({navigation}: any) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const setUserInfo = createAction<any>('user/setUserInfo');
 
   const isFormValid = () => {
     return email !== '' && password !== '';
@@ -62,6 +66,7 @@ const LogIn = ({navigation}: any) => {
             if (error) {
             } else {
               navigation.navigate('Layout');
+              dispatch(setUserInfo(email));
             }
           } else {
             Alert.alert('Неверно');

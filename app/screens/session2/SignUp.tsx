@@ -41,6 +41,16 @@ const SignUp = ({navigation}: any) => {
           },
         ])
         .select();
+
+      await supabase
+        .from('UserPayment')
+        .insert([
+          {
+            user_email: email,
+            balance: 0,
+          },
+        ])
+        .select();
     } else {
       Alert.alert('ошибка');
     }

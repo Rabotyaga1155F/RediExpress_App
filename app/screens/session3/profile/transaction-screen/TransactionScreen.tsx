@@ -31,7 +31,7 @@ const TransactionScreen = () => {
         <Text className={'text-[#0560FA]'}>{data?.trackNumber}</Text>
       </Text>
       <TouchableOpacity
-        onPress={() => navigation.navigate('Layout')}
+        onPress={() => navigation.navigate('Layout' as never)}
         className={
           'bg-[#0560FA] w-[342px] h-[46px] items-center rounded mt-40'
         }>
@@ -40,7 +40,7 @@ const TransactionScreen = () => {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate('Layout')}
+        onPress={() => navigation.navigate('Layout' as never)}
         className={
           'bg-white w-[342px] border border-[#0560FA] h-[46px] items-center rounded mt-2 '
         }>

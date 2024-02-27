@@ -1,6 +1,5 @@
 import React, {FC, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Shadow} from 'react-native-shadow-2';
 import NavigatorItem from './navigator-item/NavigatorItem.tsx';
 
 interface INavigatorProps {
@@ -13,7 +12,7 @@ const Navigator: FC<INavigatorProps> = ({
   setSelectedNavigator,
 }) => {
   return (
-    <View className={'absolute bottom-0 w-full h-[45px]  '}>
+    <View className={'absolute bottom-1 w-full h-[45px]  '}>
       <View className={'flex-row justify-between mx-4'}>
         <NavigatorItem
           imgName={selectedNavigator === 'home' ? 'homeSelected' : 'home'}

@@ -12,6 +12,8 @@ import Notifications from '../screens/session3/profile/notifications/Notificatio
 import Statements from '../screens/session3/profile/statements/Statements.tsx';
 import StatementsResult from '../screens/session3/profile/statements/StatementsResult.tsx';
 import TransactionScreen from '../screens/session3/profile/transaction-screen/TransactionScreen.tsx';
+import SendAPackageTwo from '../screens/session4/SendAPackageTwo.tsx';
+import DeliverySuccesfull from '../screens/session4/DeliverySuccesfull.tsx';
 import React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -90,6 +92,16 @@ const Navigation = () => {
         <Stack.Screen
           name={'TransactionScreen'}
           component={TransactionScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={'SendAPackageTwo'}
+          component={SendAPackageTwo}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={'DeliverySuccesfull'}
+          component={DeliverySuccesfull}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

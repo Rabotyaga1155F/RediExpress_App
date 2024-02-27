@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, Touchable, TouchableOpacity, View} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {DeliveryType, IData} from './Statements.tsx';
 import Header from '../../../../components/header/Header.tsx';
 import {generateTrack} from '../../../../utils/random-track.ts';
 import {supabase} from '../../../../supabase.ts';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../../../store/store.ts';
 
 type RootStackParamList = {
   FormData: {FormData: IData};
@@ -17,19 +19,40 @@ const StatementsResult = () => {
   const route = useRoute<NewDataRouteProp>();
   const data = route.params;
   const navigation = useNavigation();
+  const userInfo = useSelector((state: RootState) => state.user);
+  const userEmailWithGoogleAuth = userInfo?.userInfo?.user?.email;
 
   const calculateTotal = () => {
-    let deliveryCharge = 2500; // Начальная стоимость доставки
+    let deliveryCharge = 2500;
     if (data.FormData.deliveryType === DeliveryType.instant) {
-      deliveryCharge += 300; // Стоимость мгновенной доставки
+      deliveryCharge += 300;
     } else {
-      deliveryCharge += 100; // Стоимость запланированной доставки
+      deliveryCharge += 100;
     }
     const taxAndServiceCharges = 200;
     const totalPackageCost = deliveryCharge + taxAndServiceCharges;
 
     return totalPackageCost;
   };
+  const [userBalance, setUserBalance] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      let {data, error} = await supabase
+        .from('UserPayment')
+        .select('*')
+        .eq(
+          'user_email',
+          userEmailWithGoogleAuth === undefined
+            ? userInfo.userInfo
+            : userEmailWithGoogleAuth,
+        );
+
+      setUserBalance(data || []);
+      console.log(data);
+    };
+    fetch();
+  }, []);
 
   return (
     <View>
@@ -149,8 +172,36 @@ const StatementsResult = () => {
                 track_number: trackNumber,
                 total_price: calculateTotal(),
                 delivery_type: data.FormData.deliveryType,
+                sender_email:
+                  userEmailWithGoogleAuth === undefined
+                    ? userInfo.userInfo
+                    : userEmailWithGoogleAuth,
               });
 
+              const currentDate = new Date();
+              await supabase.from('Payment').insert({
+                sum: calculateTotal(),
+                payment_date: currentDate.toISOString().split('T')[0],
+                user_email:
+                  userEmailWithGoogleAuth === undefined
+                    ? userInfo.userInfo
+                    : userEmailWithGoogleAuth,
+                transaction_type: 2,
+                comment: 'Delivery',
+              });
+
+              await supabase
+                .from('UserPayment')
+                .update({balance: userBalance[0].balance - calculateTotal()})
+                .eq(
+                  'user_email',
+                  userEmailWithGoogleAuth === undefined
+                    ? userInfo.userInfo
+                    : userEmailWithGoogleAuth,
+                )
+                .select();
+
+              // @ts-ignore
               navigation.navigate('TransactionScreen', {
                 trackNumber: trackNumber,
               });

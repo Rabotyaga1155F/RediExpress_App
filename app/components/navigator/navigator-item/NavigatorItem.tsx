@@ -40,8 +40,8 @@ const NavigatorItem: FC<INavigatorItemProps> = ({
       <View
         className={
           selected
-            ? 'flex-col w-[41px] h-[41px] items-center border-t-2 border-[#0560FA]'
-            : 'flex-col w-[41px] h-[41px] items-center '
+            ? 'flex-col pt-1 w-[41px] h-[41px] items-center border-t-2 border-[#0560FA]'
+            : 'flex-col pt-1 w-[41px] h-[41px] items-center '
         }>
         <Image source={source} className={'w-[24px] h-[24px] mx-auto'} />
         <Text className={'text-[12px]'}>{text}</Text>

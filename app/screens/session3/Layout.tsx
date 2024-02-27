@@ -12,7 +12,7 @@ const Layout = ({navigation}: any) => {
     <View className={'min-h-full relative'}>
       <View className={'pb-[45px]'}>
         {selectedNavigator === 'profile' ? (
-          <Profile navigation={navigation} />
+          <Profile />
         ) : selectedNavigator === 'home' ? (
           <Home />
         ) : selectedNavigator === 'wallet' ? (

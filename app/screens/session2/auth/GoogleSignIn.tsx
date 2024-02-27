@@ -34,6 +34,7 @@ const GoogleSignIn: FC<IProps> = ({navigation}) => {
                 provider: 'google',
                 token: userInfo.idToken,
               });
+
               dispatch(setUserInfo(userInfo));
               navigation.navigate('Layout');
             } else {
