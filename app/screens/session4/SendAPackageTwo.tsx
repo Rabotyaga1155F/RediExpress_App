@@ -174,7 +174,10 @@ const SendAPackageTwo = () => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={async () => {
-              navigation.navigate('DeliverySuccesfull' as never);
+              navigation.navigate(
+                'DeliverySuccesfull' as never,
+                {trackNumber: trackNumber} as never,
+              );
               console.log(userEmail);
               await supabase
                 .from('Package')

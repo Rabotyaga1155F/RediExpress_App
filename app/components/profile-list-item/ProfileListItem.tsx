@@ -34,14 +34,14 @@ const ProfileListItem: FC<IProfileListItemProps> = ({
   const source = imageMap[imgName];
   return (
     <TouchableOpacity onPress={onPress}>
-      <View className={'mt-4 border h-[62px] border-gray-300 px-2 py-3'}>
+      <View className={'mt-4 border h-[62px] border-gray-300 px-2 py-3 '}>
         <View className={'flex-row items-center'}>
           <Image
             source={source}
             className={' w-[19px] h-[19px] rounded-[40px]'}
           />
           <View className={'ml-3'}>
-            <Text className={'text-[#3A3A3A] text-[16px] font-medium '}>
+            <Text className={'text-[#3A3A3A] text-[16px] font-medium'}>
               {h1}
             </Text>
             <Text className={'text-[12px] text-[#A7A7A7]'}>{h3}</Text>

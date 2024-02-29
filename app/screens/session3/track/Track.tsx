@@ -1,20 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
 // @ts-ignore
 import XMLParser from 'react-xml-parser';
-import {
-  Alert,
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import YaMap, {
-  DrivingInfo,
-  Marker,
-  Polyline,
-  RoutesFoundEvent,
-} from 'react-native-yamap';
+import {Alert, Image, ScrollView, Text, View} from 'react-native';
+import YaMap, {Marker, Polyline} from 'react-native-yamap';
 import TrackDelivery from '../../../components/track-delivery/TrackDelivery.tsx';
 import BasicButton from '../../../ui/buttons/basic-button/BasicButton.tsx';
 import {useSelector} from 'react-redux';

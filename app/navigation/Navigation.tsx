@@ -14,6 +14,10 @@ import StatementsResult from '../screens/session3/profile/statements/StatementsR
 import TransactionScreen from '../screens/session3/profile/transaction-screen/TransactionScreen.tsx';
 import SendAPackageTwo from '../screens/session4/SendAPackageTwo.tsx';
 import DeliverySuccesfull from '../screens/session4/DeliverySuccesfull.tsx';
+import PDFViewer from '../components/pdf-viewer/PDFViewer.tsx';
+import ChatsScreen from '../screens/session4/chats/ChatsScreen.tsx';
+import ChatRider from '../components/chat-rider/ChatRider.tsx';
+import CallRider from '../screens/session5/CallRider.tsx';
 import React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -102,6 +106,26 @@ const Navigation = () => {
         <Stack.Screen
           name={'DeliverySuccesfull'}
           component={DeliverySuccesfull}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={'PDFViewer'}
+          component={PDFViewer}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={'ChatsScreen'}
+          component={ChatsScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={'ChatRider'}
+          component={ChatRider}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={'CallRider'}
+          component={CallRider}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

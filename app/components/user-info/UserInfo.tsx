@@ -21,7 +21,6 @@ const UserInfo = () => {
 
   const [Balance, setBalance] = useState<any[]>([]);
   const [FullName, setFullName] = useState<any[]>([]);
-  const [moneyState, setMoneyState] = useState<any>();
   const [showBalance, setShowBalance] = useState<boolean>(true);
 
   useEffect(() => {

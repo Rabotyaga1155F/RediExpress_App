@@ -10,7 +10,7 @@ const Profile: FC = () => {
   const navigation = useNavigation();
   return (
     <ScrollView>
-      <View>
+      <View className={'dark:bg-[#001B3B]'}>
         <Text
           className={
             'text-center pt-16  border-b border-gray-300 h-[108px] text-[#A7A7A7] font-medium text-[16px]'
@@ -22,20 +22,18 @@ const Profile: FC = () => {
       <View className={'mt-4'} />
       <EnableDarkmode />
 
-      <View className={'mx-4'}>
+      <View className={'mx-4  '}>
         <ProfileListItem
           h1={'Edit Profile'}
           h3={'Name, phone no, address, email ...'}
           imgName={'editProfile'}
         />
         <ProfileListItem
-          onPress={() => navigation.navigate('Statements' as never)}
           h1={'Statements & Reports'}
           h3={'Download transaction details, orders, deliveries'}
           imgName={'statements'}
         />
         <ProfileListItem
-          onPress={() => navigation.navigate('Notifications' as never)}
           h1={'Notification Settings'}
           h3={'mute, unmute, set location & tracking setting'}
           imgName={'notification'}

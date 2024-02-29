@@ -8,7 +8,7 @@ interface IHeaderProps {
 
 const Header: FC<IHeaderProps> = ({headerName, onBackButtonPress}) => {
   return (
-    <View className={'flex-row border-b border-gray-300 justify-between'}>
+    <View className={'flex-row  border-b border-gray-300 justify-between'}>
       <TouchableOpacity onPress={onBackButtonPress}>
         <Image
           className={'ml-3 mt-[68px]'}

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, Alert} from 'react-native';
-import OtpNumberComponent from '../../components/OtpNumberComponent.tsx';
+import OtpNumberComponent from '../../components/otp-number/OtpNumberComponent.tsx';
 import BigBlueButton from '../../ui/buttons/BigBlueButton/BigBlueButton.tsx';
 import {supabase} from '../../supabase.ts';
 import {RouteProp, useRoute} from '@react-navigation/native';
@@ -19,13 +19,20 @@ const OtpVerification = ({navigation}: any) => {
   const [fifthNum, setFifthNum] = useState('');
   const [sixNum, setSixNum] = useState('');
   const [otp, setOtp] = useState('');
+  const [timer, setTimer] = useState(60); // Изначально устанавливаем таймер на 60 секунд
 
   const route = useRoute<NewPasswordRouteProp>();
   const email = route.params?.email;
 
   useEffect(() => {
-    console.log(email);
-  }, []);
+    if (timer > 0) {
+      const intervalId = setInterval(() => {
+        setTimer(prevTimer => prevTimer - 1);
+      }, 1000);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [timer]);
 
   const isValidForm = () => {
     return (
@@ -42,7 +49,7 @@ const OtpVerification = ({navigation}: any) => {
     try {
       const otp = `${firstNum}${secondNum}${thirdNum}${fourthNum}${fifthNum}${sixNum}`;
       const {error} = await supabase.auth.verifyOtp({
-        email: 'cool.poryadin2014@yandex.ru',
+        email: email,
         token: otp,
         type: 'email',
       });
@@ -54,6 +61,11 @@ const OtpVerification = ({navigation}: any) => {
     } catch (error) {
       Alert.alert('Ошибка');
     }
+  };
+
+  const handleResendCode = async () => {
+    timer == 0 && (await supabase.auth.resetPasswordForEmail(email));
+    timer == 0 && setTimer(60);
   };
 
   return (
@@ -77,7 +89,7 @@ const OtpVerification = ({navigation}: any) => {
         <Text className={'text-[A7A7A7] text-[14px]'}>
           If you didn't receive code,
         </Text>
-        <TouchableOpacity onPress={() => Alert.alert('Resended')}>
+        <TouchableOpacity onPress={handleResendCode}>
           <Text className={'text-[#0560FA] font-medium text-[14px]'}>
             resend
           </Text>
@@ -89,10 +101,12 @@ const OtpVerification = ({navigation}: any) => {
         onPress={handleVerifyOTP}>
         Send OTP
       </BigBlueButton>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('NewPassword', {email: email})}>
-        <Text>Skip</Text>
-      </TouchableOpacity>
+      {/* Отображение таймера */}
+      {timer > 0 && (
+        <View style={{alignItems: 'center', marginTop: 10}}>
+          <Text>Resend OTP in: {timer} seconds</Text>
+        </View>
+      )}
     </View>
   );
 };

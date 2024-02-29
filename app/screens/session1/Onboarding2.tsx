@@ -27,12 +27,11 @@ const Onboarding2 = ({navigation}: any) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={() => navigation.navigate('Onboarding3')}
           className={
             'w-[100px] h-[50px] rounded bg-[#0560FA] border border-[#0560FA]'
           }>
-          <Text
-            onPress={() => navigation.navigate('Onboarding3')}
-            className={'font-bold text-white  text-center my-auto'}>
+          <Text className={'font-bold text-white  text-center my-auto'}>
             Next
           </Text>
         </TouchableOpacity>

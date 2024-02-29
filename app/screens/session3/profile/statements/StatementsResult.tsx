@@ -29,7 +29,10 @@ const StatementsResult = () => {
     } else {
       deliveryCharge += 100;
     }
-    const taxAndServiceCharges = 200;
+    const taxRate = 0.05;
+    const taxAndServiceCharges =
+      deliveryCharge * taxRate +
+      (data.FormData.deliveryType === DeliveryType.instant ? 300 : 200);
     const totalPackageCost = deliveryCharge + taxAndServiceCharges;
 
     return totalPackageCost;
@@ -138,7 +141,7 @@ const StatementsResult = () => {
           <Text className={'text-[#A7A7A7] text-[12px]'}>
             Tax and Service Charges
           </Text>
-          <Text className={'text-[12px] text-[#EC8000]'}>N200.00</Text>
+          <Text className={'text-[12px] text-[#EC8000]'}>5%</Text>
         </View>
         <View className={'border border-b-0 border-[#A7A7A7] mt-2'} />
         <View className={'flex-row justify-between mt-2'}>
@@ -167,7 +170,7 @@ const StatementsResult = () => {
                 destination_city: data.FormData.destinationCity,
                 destination_number: data.FormData.destinationPhoneNumber,
                 package_items: data.FormData.packageItems,
-                weight_items: data.FormData.packageItems,
+                weight_items: data.FormData.weightItems,
                 worth_items: data.FormData.itemsPrice,
                 track_number: trackNumber,
                 total_price: calculateTotal(),

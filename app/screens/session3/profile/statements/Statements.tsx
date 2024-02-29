@@ -47,6 +47,8 @@ const Statements = ({navigation}: any) => {
     DeliveryType.instant,
   );
 
+  const [isFormFilled, setIsFormFilled] = useState(false);
+
   const [formData, setFormData] = useState<IData>({
     originAdress: originAdress,
     originCity: originCity,
@@ -64,6 +66,7 @@ const Statements = ({navigation}: any) => {
     setDestinations([
       ...destinations,
       <DestinationDetails
+        key={Math.floor(Math.random() * 10000) + 1}
         setDestinationCity={setDestinationCity}
         setDestinationPhoneNumber={setDestinationPhoneNumber}
         setDestinationAddress={setDestinationAdress}
@@ -86,6 +89,18 @@ const Statements = ({navigation}: any) => {
       weightItems,
       packageItems,
     });
+
+    const isFilled =
+      !!originAdress &&
+      !!originCity &&
+      !!originPhoneNumber &&
+      !!destinationAdress &&
+      !!destinationCity &&
+      !!destinationPhoneNumber &&
+      !!packageItems &&
+      !!weightItems &&
+      !!itemsPrice;
+    setIsFormFilled(isFilled);
   }, [
     originAdress,
     originCity,
@@ -131,22 +146,24 @@ const Statements = ({navigation}: any) => {
       </Text>
       <View className={'flex-row justify-between mx-6 mb-4'}>
         <DeliveryTypeComponent
-          onLongPress={() =>
+          onPress={() =>
+            isFormFilled &&
             navigation.navigate('StatementsResult', {FormData: formData})
           }
           imgName={'clock'}
           text={'Instant Delivery'}
           selectedType={selectedDelivery}
-          onPress={() => setSelectedDelivery(DeliveryType.instant)}
+          onLongPress={() => setSelectedDelivery(DeliveryType.instant)}
         />
         <DeliveryTypeComponentSch
-          onLongPress={() =>
+          onPress={() =>
+            isFormFilled &&
             navigation.navigate('StatementsResult', {FormData: formData})
           }
           imgName={'calendar'}
           text={'Scheduled delivery'}
           selectedType={selectedDelivery}
-          onPress={() => setSelectedDelivery(DeliveryType.scheduled)}
+          onLongPress={() => setSelectedDelivery(DeliveryType.scheduled)}
         />
       </View>
     </ScrollView>

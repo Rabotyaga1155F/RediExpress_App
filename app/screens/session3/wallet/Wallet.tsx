@@ -3,7 +3,6 @@ import {ScrollView, Text, View} from 'react-native';
 import Header from '../../../components/header/Header.tsx';
 import UserInfo from '../../../components/user-info/UserInfo.tsx';
 import TopUp from '../../../components/wallet-top-up/TopUp.tsx';
-import DropShadow from 'react-native-drop-shadow';
 import Transaction from '../../../components/wallet-top-up/Transaction.tsx';
 import {supabase} from '../../../supabase.ts';
 import {useSelector} from 'react-redux';

@@ -5,9 +5,12 @@ import Profile from './profile/Profile.tsx';
 import Home from './home/Home.tsx';
 import Wallet from './wallet/Wallet.tsx';
 import Track from './track/Track.tsx';
+import {useNavigation} from '@react-navigation/native';
 
 const Layout = ({navigation}: any) => {
+  const navigat = useNavigation();
   const [selectedNavigator, setSelectedNavigator] = useState('home');
+
   return (
     <View className={'min-h-full relative'}>
       <View className={'pb-[45px]'}>

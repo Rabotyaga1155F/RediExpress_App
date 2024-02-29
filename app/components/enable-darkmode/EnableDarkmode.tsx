@@ -1,16 +1,21 @@
 import React, {FC, useState} from 'react';
 import {Text, View} from 'react-native';
 import {Switch} from 'react-native-switch';
+import {useColorScheme} from 'nativewind';
 const EnableDarkmode: FC = () => {
   const [trueToggle, setTrueToggle] = useState(false);
+  const {colorScheme, toggleColorScheme} = useColorScheme();
+  console.log(colorScheme);
   return (
-    <View className={'mx-4 flex-row justify-between items-center'}>
+    <View className={'mx-4 flex-row justify-between items-center '}>
       <Text className={'text-[16px] font-medium text-black'}>
         Enable dark Mode
       </Text>
       <Switch
-        value={trueToggle}
-        onValueChange={val => setTrueToggle(val)}
+        value={colorScheme === 'dark'}
+        onValueChange={val => {
+          toggleColorScheme();
+        }}
         disabled={false}
         activeText={''}
         inActiveText={''}

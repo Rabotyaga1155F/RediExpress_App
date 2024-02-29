@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import BasicTextInput from '../../ui/text-input-components/BasicTextInput.tsx';
-import CheckBoxComponentSignUp from '../../components/CheckBoxComponentSignUp.tsx';
+import CheckBoxComponentSignUp from '../../components/check-box-sign/CheckBoxComponentSignUp.tsx';
 import BigBlueButton from '../../ui/buttons/BigBlueButton/BigBlueButton.tsx';
 import {supabase} from '../../supabase.ts';
 import GoogleSignIn from './auth/GoogleSignIn.tsx';
@@ -22,8 +22,13 @@ const SignUp = ({navigation}: any) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
+  const validateEmail = (email: string) => {
+    const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+    return emailPattern.test(email);
+  };
+
   const login = async () => {
-    if (email && password) {
+    if (email && password && validateEmail(email)) {
       let {} = await supabase.auth.signUp({
         email: email,
         password: password,
@@ -52,7 +57,7 @@ const SignUp = ({navigation}: any) => {
         ])
         .select();
     } else {
-      Alert.alert('ошибка');
+      Alert.alert('Ошибка');
     }
   };
 
@@ -63,7 +68,8 @@ const SignUp = ({navigation}: any) => {
       email !== '' &&
       password !== '' &&
       confirmPassword !== '' &&
-      toggleCheckBox
+      toggleCheckBox &&
+      validateEmail(email)
     );
   };
 

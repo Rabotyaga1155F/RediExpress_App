@@ -54,7 +54,7 @@ const TrackDelivery = () => {
   return (
     <View className={'mt-4'}>
       <View className={'flex-row'}>
-        <CheckBox value={courierRequested} />
+        <CheckBox tintColors={{true: '#0560FA'}} value={courierRequested} />
         <View className={'mt-2'}>
           <Text className={'text-[#A7A7A7] text-[14px]'}>
             Courier requested
