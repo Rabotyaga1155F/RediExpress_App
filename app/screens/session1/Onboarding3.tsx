@@ -1,7 +1,8 @@
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
+import navigation from '../../navigation/Navigation.tsx';
 
-const Onboarding3 = () => {
+const Onboarding3 = ({navigation}: any) => {
   return (
     <View>
       <Image
@@ -20,6 +21,7 @@ const Onboarding3 = () => {
       </Text>
       <View className={'flex-row justify-center mx-4 mt-12'}>
         <TouchableOpacity
+          onPress={() => navigation.navigate('SignUp')}
           className={
             'w-[342px] h-[46px] rounded bg-[#0560FA] border border-[#0560FA]'
           }>
@@ -32,7 +34,7 @@ const Onboarding3 = () => {
         <Text className={'text-[#A7A7A7] text-[14px]'}>
           Already have an account?
         </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('LogIn')}>
           <Text className={'text-[#0560FA] ml-[1px] text-[14px] font-medium'}>
             Sign in
           </Text>
